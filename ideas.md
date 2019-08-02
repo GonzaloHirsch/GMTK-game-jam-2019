@@ -1,6 +1,6 @@
-#ONLY ONE#
+#ONLY ONE
 
-##Primer Brainstomring##
+##Primer Brainstomring
 
 * One life
 * One button
