@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControllerVisualization : MonoBehaviour
+public class PlayerControllerVisualization : PlayerController
 {
+    public GameObject player;
+
     public float Velocity = 2f;
     public float ViewingDistance = 4f;
+    public bool isActive = true;
+    public float awareness = 0f;
+    public float offset = 1f;
 
     private Vector3 direction;
-    private float awareness = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,11 +23,16 @@ public class PlayerControllerVisualization : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateDirection();
+        if (isActive)
+        {
+            UpdateDirection();
 
-        UpdateMovement();
+            UpdateMovement();
 
-        UpdateView();
+            UpdateView();
+        }
+
+        Debug.Log(awareness);
     }
 
     private void InitVariables()
@@ -42,16 +51,17 @@ public class PlayerControllerVisualization : MonoBehaviour
 
     private void UpdateMovement()
     {
-        transform.position += direction.normalized * Time.deltaTime * Velocity;
+        player.transform.position += direction.normalized * Time.deltaTime * Velocity;
     }
 
     private void UpdateView()
     {
-        RaycastHit2D raycast = Physics2D.Raycast(ToVector2(transform.position), direction.normalized, ViewingDistance);
+        Vector2 v2 = (Vector2)player.transform.position + ((Vector2)direction.normalized * offset);
+        RaycastHit2D raycast = Physics2D.Raycast(v2, direction.normalized, ViewingDistance);
 
         HandleRaycast(raycast);
-
-        Debug.DrawRay(ToVector2(transform.position), direction.normalized * ViewingDistance, Color.green, 10f);
+        
+        Debug.DrawRay(v2, direction.normalized, Color.red, 1f);
     }
 
     /// <summary>
@@ -64,16 +74,14 @@ public class PlayerControllerVisualization : MonoBehaviour
         if (raycastHit.collider != null && raycastHit.collider.gameObject.tag.Equals("Fog"))
         {
             Destroy(raycastHit.collider.gameObject);
-        }
-    }
-
-    private Vector2 ToVector2(Vector3 vector)
-    {
-        return new Vector2()
+        } else if (raycastHit.collider != null && raycastHit.collider.gameObject.tag.Equals("Interactable"))
         {
-            x = vector.x,
-            y = vector.y
-        };
+            Debug.Log("INTE");
+            if (Input.GetKeyDown(KeyCode.E)){
+                raycastHit.collider.gameObject.GetComponent<Interactable>().Interact();
+                Debug.Log("HIT");
+            }
+        }
     }
 
     public void RaiseAwareness(float increment)

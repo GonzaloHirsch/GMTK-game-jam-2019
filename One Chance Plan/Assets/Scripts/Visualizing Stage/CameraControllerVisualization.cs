@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 
-public class CameraControllerVisualization : MonoBehaviour
+public class CameraControllerVisualization : ObjectWithFOV
 {
     public float maxAngleOpening = 60f;
     public float velocity = 3f;
     public bool isActive = true;
-    public float awarenesFactor = 1f;
 
     private int direction = 1;
     private float totalRotation = 0f;
@@ -13,6 +12,7 @@ public class CameraControllerVisualization : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DrawMesh();
     }
 
     // Update is called once per frame
@@ -43,14 +43,5 @@ public class CameraControllerVisualization : MonoBehaviour
         {
             direction = direction * -1;
         }
-    }             
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Player"))
-        {
-            collision.gameObject.GetComponent<PlayerControllerVisualization>().RaiseAwareness(awarenesFactor);
-        }
     }
-
 }

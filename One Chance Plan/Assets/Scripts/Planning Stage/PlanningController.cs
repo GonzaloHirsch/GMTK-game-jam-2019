@@ -8,7 +8,7 @@ public class PlanningController : MonoBehaviour
 
     public void AddWait()
     {
-        ActionQueue.Enqueue(new Action(){ })
+        //ActionQueue.Enqueue(new Action() { })
     }
 
     public void AddInteraction()

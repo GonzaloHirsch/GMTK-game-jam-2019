@@ -2,31 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public abstract class GameController : MonoBehaviour
 {
-    // Singleton gamecontroller
-    private GameController gameController;
+    public GameObject activePlayer;
 
-    private void Awake()
+    public PlayerController GetActivePlayerController()
     {
-        // Singleton gamecontroller
-        if (this.gameController != this)
-        {
-            Destroy(this.gameController);
-        }
-
-        this.gameController = this;
+        return activePlayer.GetComponent<PlayerController>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void ActivateAlarm();
 }
