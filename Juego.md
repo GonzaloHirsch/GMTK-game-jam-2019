@@ -123,7 +123,7 @@ Los eventos se realizan una vez, ejemplo: si usas algo de incendios en visualiza
   * Mapa mezcla de ambos
   * Barra de awareness
   
-## Mapas
+## Mapas
 
 * Tutorial
   * Carcel de donde escapas
