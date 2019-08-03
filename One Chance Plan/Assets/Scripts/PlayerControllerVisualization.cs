@@ -8,6 +8,7 @@ public class PlayerControllerVisualization : MonoBehaviour
     public float ViewingDistance = 4f;
 
     private Vector3 direction;
+    private float awareness = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -73,5 +74,10 @@ public class PlayerControllerVisualization : MonoBehaviour
             x = vector.x,
             y = vector.y
         };
+    }
+
+    public void RaiseAwareness(float increment)
+    {
+        awareness += increment;
     }
 }

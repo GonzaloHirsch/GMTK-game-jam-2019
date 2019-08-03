@@ -9,6 +9,7 @@ public class PoliceControllerVisualization : MonoBehaviour
     public bool isActive = true;
     public float velocity = 3f;
     public float smoothFactor = 0.75f;
+    public float awarenesFactor = 1f;
 
     private int positionsIndex = 0;
     private Tweener activeTweener;
@@ -16,12 +17,31 @@ public class PoliceControllerVisualization : MonoBehaviour
     private Vector3 nextPosition;
     private float distance;
 
+    private const float EPSILON = 0.05f;
+
     // Start is called before the first frame update
     void Start()
     {
-        DOTween.Init();
-
         nextPosition = transform.position;
+    }
+
+    private void RotateView()
+    {
+        Vector3 direction = (nextPosition - transform.position).normalized;
+
+        if (System.Math.Abs(direction.x - 1) < EPSILON)
+        {
+            transform.Rotate(new Vector3(0, 0, 270) - transform.rotation.eulerAngles);
+        } else if (System.Math.Abs(direction.x - (-1)) < EPSILON)
+        {
+            transform.Rotate(new Vector3(0, 0, 90) - transform.rotation.eulerAngles);
+        } else if (System.Math.Abs(direction.y - 1) < EPSILON)
+        {
+            transform.Rotate(new Vector3(0, 0, 360) - transform.rotation.eulerAngles);
+        } else if  (System.Math.Abs(direction.y - (-1)) < EPSILON)
+        {
+            transform.Rotate(new Vector3(0, 0, 180) - transform.rotation.eulerAngles);
+        }
     }
 
     // Update is called once per frame
@@ -33,6 +53,7 @@ public class PoliceControllerVisualization : MonoBehaviour
         } else if (AreSameVectors(nextPosition, transform.position))
         {
             NextMovement();
+            RotateView();
         }
 
         /*
@@ -80,8 +101,12 @@ public class PoliceControllerVisualization : MonoBehaviour
         return (end - start).magnitude / velocity;
     }
 
-    private void UpdateView()
+    void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerControllerVisualization>().RaiseAwareness(awarenesFactor);
+        }
     }
 
     private bool AreSameVectors(Vector3 a, Vector3 b)
