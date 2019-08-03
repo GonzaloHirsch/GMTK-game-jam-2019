@@ -2,39 +2,6 @@
 
 Es un top-down 2D donde hay que planear un *robo* u otros escenarios a definir, y despues de planear y definir todo lo que uno va a hacer se ejecuta el plan y se ve si se logra ganar.
 
-## Conceptos
-
-Una habilidad random puede ser:
-* Que se apague la luz y las camaras no funcionen
-
-* Representar condicion random en cuadradito con quote text
-* Index de las habilidades o enemigos
-* Llaves/tarjetas
-* Managers
-* Arrastrar jugador
-* 1 solo boton que es interactuar y wati
-* boton de wait
-* tabs diferentes
-* SpeedRun Timer
-* condicion ser olvidadizo
-* Condicion gente perseguida
-* Condicion ser mas sigiloso
-* Condicion camaras andan mal
-* Condicion policias no les pagan lo suficiente
-* Condicion gente averiguando si pagaron bien impuestos
-* Condicion empresa nueva de policias asi que todos re alerta
-* Condicion Hijo del Manager/Llaves desbloqueadas
-* Condicion la gente esta paranoica
-* Condicion hay mas camaras
-* Gordo que tapa guardia
-* Policias amigos que hablan entre si y se distraen
-* Gente que hace escenas y llama la atencion
-* Condicion sudden Pandemia
-* Condicion otros ladrones tambien entraron a robar al mismo tiempo que vos
-
-* La habilidad/condicion cambia una vez que se muere, no cuando cambia de mapa
-* Introducir la mecanica de cambio de habilidad en el "tutorial"
-
 ## Etapas
 
 * Visualizacion
@@ -144,3 +111,36 @@ Los eventos se realizan una vez, ejemplo: si usas algo de incendios en visualiza
     * Oficinas
     * Centro de control
     * Oficina del manager
+
+## Conceptos(Ideas para no olvidarnos)
+
+Una habilidad random puede ser:
+* Que se apague la luz y las camaras no funcionen
+
+* Representar condicion random en cuadradito con quote text
+* Index de las habilidades o enemigos
+* Llaves/tarjetas
+* Managers
+* Arrastrar jugador
+* 1 solo boton que es interactuar y wati
+* boton de wait
+* tabs diferentes
+* SpeedRun Timer
+* condicion ser olvidadizo
+* Condicion gente perseguida
+* Condicion ser mas sigiloso
+* Condicion camaras andan mal
+* Condicion policias no les pagan lo suficiente
+* Condicion gente averiguando si pagaron bien impuestos
+* Condicion empresa nueva de policias asi que todos re alerta
+* Condicion Hijo del Manager/Llaves desbloqueadas
+* Condicion la gente esta paranoica
+* Condicion hay mas camaras
+* Gordo que tapa guardia
+* Policias amigos que hablan entre si y se distraen
+* Gente que hace escenas y llama la atencion
+* Condicion sudden Pandemia
+* Condicion otros ladrones tambien entraron a robar al mismo tiempo que vos
+
+* La habilidad/condicion cambia una vez que se muere, no cuando cambia de mapa
+* Introducir la mecanica de cambio de habilidad en el "tutorial"
