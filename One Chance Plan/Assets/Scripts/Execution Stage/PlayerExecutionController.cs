@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PlayerExecutionController : MonoBehaviour
+public class PlayerExecutionController : PlayerController
 {
     public static PlayerExecutionController Instance;
 
@@ -26,6 +26,7 @@ public class PlayerExecutionController : MonoBehaviour
         movePositions = new Queue<Vector3Int>();
         position = (Vector3Int)StartCellPosition;
         transform.position = map.GetCellCenterWorld((Vector3Int)StartCellPosition);
+        MainPlayerController.Instance.activePlayerController = this;
     }
 
     public void MoveTo(Vector3Int position)
@@ -44,14 +45,6 @@ public class PlayerExecutionController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Debug.Log(string.Format("Co-ords of mouse is [X: {0} Y: {0}]", pos.x, pos.y));
-            Vector3Int posi = map.WorldToCell(new Vector2(pos.x, pos.y));
-            MoveTo(posi);
-        }
-
         if (movePositions.Count > 0)
         {
             UpdateMovement();
@@ -67,4 +60,13 @@ public class PlayerExecutionController : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, map.GetCellCenterWorld(movePositions.Peek()), step);
     }
 
+    public override void Activate()
+    {
+        //
+    }
+
+    public override void Deactivate()
+    {
+        //
+    }
 }

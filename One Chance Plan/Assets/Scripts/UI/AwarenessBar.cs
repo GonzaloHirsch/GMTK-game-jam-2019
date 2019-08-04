@@ -43,10 +43,11 @@ public class AwarenessBar : MonoBehaviour
         maxAwarenessValue = gameController.maxAwareness;
         foregroundImage = gameObject.GetComponent<Image>();
         Value = 0;
-    }
+    } 
 
     void Update()
     {
+        playerController = MainPlayerController.Instance.GetActivePlayerController();
         time = (playerController.awareness - foregroundImage.fillAmount) / unitsPerSecond;
         
         if (time > 1f)

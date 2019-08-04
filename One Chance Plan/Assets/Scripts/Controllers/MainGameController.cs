@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using DG.Tweening;
+using System;
+using TMPro;
 
 public class MainGameController : MonoBehaviour
 {
     public GameObject visualizingStageController;
     public GameObject planningStageController;
+
     public GameObject executionStageController;
 
     public GameObject panelFirst;
@@ -20,6 +23,8 @@ public class MainGameController : MonoBehaviour
     public GameController activeGameController;
     public static MainGameController Instance;
     public List<Ability> abilities;
+
+    public GameObject endCanvas;
 
     public Canvas mainMenuUI;
 
@@ -68,7 +73,7 @@ public class MainGameController : MonoBehaviour
 
     private void SetAbility()
     {
-        MainPlayerController.Instance.ability = abilities[Random.Range(0, abilities.Count)];
+        MainPlayerController.Instance.ability = abilities[UnityEngine.Random.Range(0, abilities.Count)];
         MainPlayerController.Instance.ability.Apply();
     }
 
@@ -110,7 +115,7 @@ public class MainGameController : MonoBehaviour
     {
         panelStage2.gameObject.SetActive(true);
 
-        //StartCoroutine(Finish());
+        StartCoroutine(Finish());
 
         panelStage2.gameObject.SetActive(false);
 
@@ -135,6 +140,22 @@ public class MainGameController : MonoBehaviour
     public void MoveToEnd()
     {
         activeGameController.Deactivate();
-        activeGameController = null;
+        activeGameController = null;    
+    }
+
+    public void Win()
+    {
+        endCanvas.SetActive(true);
+        endCanvas.transform.GetChild(1).GetComponent<Text>().text = "You Escaped!";
+        endCanvas.transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().DOFade(1, 2);
+        endCanvas.transform.GetChild(1).GetComponent<Text>().DOFade(1, 2);
+    }
+
+    public void Lose()
+    {
+        endCanvas.SetActive(true);
+        endCanvas.transform.GetChild(1).GetComponent<Text>().text = "You got Caught!";
+        endCanvas.transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().DOFade(1, 2);
+        endCanvas.transform.GetChild(1).GetComponent<Text>().DOFade(1, 2);
     }
 }

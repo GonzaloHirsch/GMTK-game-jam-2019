@@ -160,7 +160,6 @@ public class PlayerControllerVisualization : PlayerController
                 //Debug.Log("CHANGE");
                 map.SetTile(map.WorldToCell(raycastHit.point), null);
                 //collider2D.
-                Debug.Log(raycastHit.point);
             }
         } else if (raycastHit.collider != null && raycastHit.collider.gameObject.tag.Equals("Interactable"))
         {
@@ -172,10 +171,5 @@ public class PlayerControllerVisualization : PlayerController
         //{
         //    Debug.Log("SELF");
         //}
-    }
-
-    public void RaiseAwareness(float increment)
-    {
-        awareness += increment;
     }
 }

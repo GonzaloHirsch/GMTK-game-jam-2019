@@ -9,7 +9,12 @@ public abstract class PlayerController : MonoBehaviour
 
     public GameObject player;
 
-    public float awareness;
+    public float awareness = 0;
+
+    public void RaiseAwareness(float increment)
+    {
+        awareness += increment;
+    }
 
     public bool isActive = false;
 

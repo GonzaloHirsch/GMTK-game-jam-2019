@@ -10,7 +10,7 @@ public class FOV : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            collision.gameObject.GetComponent<PlayerControllerVisualization>().RaiseAwareness(awarenessFactor);
+            collision.gameObject.GetComponent<PlayerController>().RaiseAwareness(awarenessFactor);
         }
     }
 
@@ -18,7 +18,7 @@ public class FOV : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            collision.gameObject.GetComponent<PlayerControllerVisualization>().RaiseAwareness(awarenessFactor);
+            collision.gameObject.GetComponent<PlayerController>().RaiseAwareness(awarenessFactor);
         }
     }
 }

@@ -63,6 +63,8 @@ public class VisualizingStageController : GameController
             if (GetActivePlayerController().GetComponent<PlayerControllerVisualization>().awareness > maxAwareness)
             {
                 Deactivate();
+
+                MainGameController.Instance.Lose();
             }
         }
     }

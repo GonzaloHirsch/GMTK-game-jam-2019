@@ -6,6 +6,8 @@ public class ExecutionController : GameController
 {
     public static ExecutionController Instance;
 
+    public Canvas UI;
+
     public GameObject player;
 
     private int ticks = 0;
@@ -40,6 +42,16 @@ public class ExecutionController : GameController
             UpdateStep();
 
         ticks++;
+
+        if (isActive)
+        {
+            Debug.Log("asdasd");
+            if (MainPlayerController.Instance.GetActivePlayerController().awareness > maxAwareness)
+            {
+                Deactivate();
+                MainGameController.Instance.Lose();
+            }
+        }
     }
 
     private void UpdateStep()
@@ -70,11 +82,23 @@ public class ExecutionController : GameController
 
     public override void Activate()
     {
+        isActive = true;
+        foreach (GameObject police in allPolice)
+        {
+            police.GetComponent<PoliceControllerVisualization>().isActive = true;
+        }
+
+        foreach (GameObject cam in allCameras)
+        {
+            cam.GetComponent<CameraControllerVisualization>().isActive = true;  
+        }
         player.SetActive(true);
+        UI.gameObject.SetActive(true);
     }
 
     public override void Deactivate()
     {
+        isActive = false;
         player.SetActive(false);
     }
 }
