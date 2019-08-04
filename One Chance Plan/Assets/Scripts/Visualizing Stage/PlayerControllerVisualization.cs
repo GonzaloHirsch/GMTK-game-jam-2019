@@ -87,11 +87,15 @@ public class PlayerControllerVisualization : PlayerController
     public override void Activate()
     {
         isActive = true;
+        topCamera.gameObject.SetActive(true);
+        this.gameObject.SetActive(true);
     }
 
     public override void Deactivate()
     {
         isActive = false;
+        topCamera.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 
     private void UpdateDirection()
@@ -155,6 +159,7 @@ public class PlayerControllerVisualization : PlayerController
             {
                 //Debug.Log("CHANGE");
                 map.SetTile(map.WorldToCell(raycastHit.point), null);
+                //collider2D.
                 Debug.Log(raycastHit.point);
             }
         } else if (raycastHit.collider != null && raycastHit.collider.gameObject.tag.Equals("Interactable"))
