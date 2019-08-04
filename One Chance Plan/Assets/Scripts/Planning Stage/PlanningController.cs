@@ -6,7 +6,6 @@ using UnityEngine.Tilemaps;
 
 public class PlanningController : GameController
 {
-    public GameObject ScenePrefab;
     public GameObject Scene;
 
 
@@ -54,11 +53,11 @@ public class PlanningController : GameController
 
     public override void Activate()
     {
-        Scene = Instantiate(ScenePrefab);
+        Scene.SetActive(true);
     }
 
     public override void Deactivate()
     {
-        Destroy(Scene);
+        Scene.SetActive(false);
     }
 }
