@@ -149,6 +149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdf7e503aa8fc443f901c9f661fbf101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allCameras: []
+  allPolice: []
+  allCivilian: []
+  allKeys: []
+  allDoors: []
   activePlayer: {fileID: 0}
   isActive: 0
   policeControllers: []
@@ -414,10 +419,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keys: []
   player: {fileID: 1594181667}
+  ability: {fileID: 0}
+  awareness: 0
+  isActive: 1
   Velocity: 1
   ViewingDistance: 1
-  isActive: 1
-  awareness: 0
   offset: 0.2
 --- !u!212 &1594181669
 SpriteRenderer:
@@ -750,6 +756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualizingStageController: {fileID: 0}
   activeGameController: {fileID: 0}
+  abilities: []
 --- !u!4 &2008335242
 Transform:
   m_ObjectHideFlags: 0
