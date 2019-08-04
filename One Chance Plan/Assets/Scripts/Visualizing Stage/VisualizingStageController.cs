@@ -36,6 +36,7 @@ public class VisualizingStageController : GameController
         SetActiveState(false);
         ActivateAlarm(false);
         isActive = false;
+        MainPlayerController.Instance.GetActivePlayerController().gameObject.SetActive(false);
         this.gameObject.SetActive(false);
     }
 
