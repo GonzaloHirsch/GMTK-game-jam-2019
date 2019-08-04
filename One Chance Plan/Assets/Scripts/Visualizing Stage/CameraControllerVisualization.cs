@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 
-public class CameraControllerVisualization : ObjectWithFOV
+public class CameraControllerVisualization : SecurityCamera
 {
     public float maxAngleOpening = 60f;
     public float velocity = 3f;
-    public bool isActive = true;
 
     private int direction = 1;
     private float totalRotation = 0f;

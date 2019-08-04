@@ -112,6 +112,21 @@ Los eventos se realizan una vez, ejemplo: si usas algo de incendios en visualiza
     * Centro de control
     * Oficina del manager
 
+## Habilidades Implementadas
+
+* "No power, no cameras!"
+  * No hay camaras que funcionan
+* "Police Union Strike!"
+  * There are no police in the place
+* "Today it's Friday!"
+  * Police don't surveil that much, the raise your awareness by a smaller factor
+* "High alert police!"
+  * Police are on high alert, they raise your awareness more
+* "Forgot to lock doors!"
+  * Doors are unlocked, people forgot to lock them
+* "Missing keys!"
+  * Someone missplaced all the keys, doors cant be opened
+
 ## Conceptos(Ideas para no olvidarnos)
 
 Una habilidad random puede ser:

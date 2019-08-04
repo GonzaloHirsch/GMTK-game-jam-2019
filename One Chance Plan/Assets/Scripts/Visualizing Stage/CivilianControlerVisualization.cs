@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CivilianControlerVisualization : MonoBehaviour
+public class CivilianControlerVisualization : Civilian
 {
     public List<Vector2> positions;
-    public bool isActive = true;
     public float velocity = 3f;
     public float smoothFactor = 0.75f;
 

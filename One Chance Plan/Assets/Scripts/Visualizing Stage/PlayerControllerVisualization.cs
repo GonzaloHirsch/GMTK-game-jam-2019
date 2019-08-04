@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class PlayerControllerVisualization : PlayerController
 {
-    public GameObject player;
-
     public float Velocity = 2f;
     public float ViewingDistance = 4f;
-    public bool isActive = true;
-    public float awareness = 0f;
     public float offset = 1f;
 
-    private Vector3 direction;
+    private Vector3 direction = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
     {
-        InitVariables();
     }
 
     // Update is called once per frame
@@ -31,16 +26,20 @@ public class PlayerControllerVisualization : PlayerController
 
             UpdateView();
         }
-
-        Debug.Log(awareness);
     }
 
-    private void InitVariables()
+    public override void Activate()
     {
-        this.direction = new Vector3
-        {
-            z = 0f
-        };
+        ability = MainGameController.Instance.abilities[Random.Range(0, MainGameController.Instance.abilities.Count)];
+
+        ability.Apply();
+
+        isActive = true;
+    }
+
+    public override void Deactivate()
+    {
+        isActive = false;
     }
 
     private void UpdateDirection()

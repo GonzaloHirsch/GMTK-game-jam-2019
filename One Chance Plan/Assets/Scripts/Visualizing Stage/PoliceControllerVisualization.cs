@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PoliceControllerVisualization : ObjectWithFOV
+public class PoliceControllerVisualization : Police
 {
     public List<Vector2> positions;
     public List<Vector2> alternativePosition;
-    public bool isActive = true;
     public float velocity = 3f;
     public float smoothFactor = 0.75f;
 
