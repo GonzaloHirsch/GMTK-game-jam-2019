@@ -13,11 +13,11 @@ public class AbilityImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     void Start()
     {
         DOTween.Init();
+    }
 
-        Physics.queriesHitTriggers = true;
-
+    public void Activate()
+    {
         image = gameObject.GetComponent<Image>();
-
 
         tooltip.DOFade(0, 0f);
         tooltipText.DOFade(0, 0f);
@@ -30,7 +30,6 @@ public class AbilityImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("ENTER");
         tooltip.gameObject.SetActive(true);
         tooltipText.text = MainPlayerController.Instance.ability.description;
 
@@ -40,11 +39,8 @@ public class AbilityImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("EXIT");
-        tooltip.DOFade(0, 1f).OnComplete(() => {
-            tooltipText.DOFade(0, 0.2f).OnComplete(() => {
-                tooltip.gameObject.SetActive(false);
-            });
-        });
+        tooltip.DOFade(0, 1f);
+        tooltipText.DOFade(0, 0.2f);
+        tooltip.gameObject.SetActive(false);
     }
 }

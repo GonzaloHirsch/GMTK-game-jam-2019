@@ -45,14 +45,17 @@ public class CivilianControlerVisualization : Civilian
     // Update is called once per frame
     void Update()
     {
-        if (isActive && !AreSameVectors(nextPosition, transform.position))
+        if (isActive)
         {
-            UpdateMovement();
-        }
-        else if (AreSameVectors(nextPosition, transform.position))
-        {
-            NextMovement();
-            RotateView();
+            if (!AreSameVectors(nextPosition, transform.position))
+            {
+                UpdateMovement();
+            }
+            else if (AreSameVectors(nextPosition, transform.position))
+            {
+                NextMovement();
+                RotateView();
+            }
         }
     }
 
