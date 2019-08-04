@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ability_NoPeople : Ability
 {
-    private void Start()
+    public Ability_NoPeople()
     {
         description = "No people, must be a holiday!";
 

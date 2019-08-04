@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ability_UnlockedDoors : Ability
+public class Ability_Empty : Ability
 {
-    public Ability_UnlockedDoors()
+    public Ability_Empty()
     {
-        description = "Forgot to lock doors!";
+        description = "Your ability is to be normal!";
 
-        sprite = Resources.Load<Sprite>("Sprites/Icons/Ability_UnlockedDoors");
+        sprite = Resources.Load<Sprite>("Sprites/Icons/Ability_Empty");
     }
 
     public override void Apply()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ability_MissingKeys : Ability
 {
-    private void Start()
+    public Ability_MissingKeys()
     {
         description = "Missing keys!";
 

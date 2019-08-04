@@ -6,7 +6,7 @@ public class Ability_LowPayPolice : Ability
 {
     public float awarenessFactorDecrease = 3f;
 
-    private void Start()
+    public Ability_LowPayPolice()
     {
         description = "Today it's Friday!";
 

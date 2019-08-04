@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ability_NoPolice : Ability
 {
-    private void Start()
+    public Ability_NoPolice()
     {
         description = "Police Union Strike!";
 

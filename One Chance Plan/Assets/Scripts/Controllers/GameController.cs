@@ -14,12 +14,9 @@ public abstract class GameController : MonoBehaviour
 
     public float maxAwareness = 200;
 
-    [HideInInspector]
-    public GameObject activePlayer;
-
     public PlayerController GetActivePlayerController()
     {
-        return activePlayer.GetComponent<PlayerController>();
+        return MainPlayerController.Instance.GetActivePlayerController();
     }
 
     public abstract void ActivateAlarm(bool status);

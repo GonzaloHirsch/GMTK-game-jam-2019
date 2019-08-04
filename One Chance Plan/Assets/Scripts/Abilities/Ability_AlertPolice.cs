@@ -6,7 +6,7 @@ public class Ability_AlertPolice : Ability
 {
     public float awarenessFactorIncrease = 3f;
 
-    private void Start()
+    public Ability_AlertPolice()
     {
         description = "High alert police!";
 
