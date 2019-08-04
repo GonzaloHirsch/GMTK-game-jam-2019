@@ -14,7 +14,7 @@ public class PlanningController : GameController
     public Grid map;
     public Tilemap tilemap;
 
-    private List<IAction> ActionQueue;
+    public List<IAction> ActionQueue;
 
     public void AddWait()
     {

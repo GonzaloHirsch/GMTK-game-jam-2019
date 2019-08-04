@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ExecutionController : GameController
 {
-    public ExecutionController Instance;
+    public static ExecutionController Instance;
+
+    public GameObject player;
 
     private int ticks = 0;
 
@@ -24,9 +26,12 @@ public class ExecutionController : GameController
         ActionQueue = new Queue<IAction>();
     }
 
-    public void SetActionQueue(Queue<IAction> actionQueue)
+    public void SetActionQueue(List<IAction> actionQueue)
     {
-        this.ActionQueue = actionQueue;
+        foreach(IAction action in actionQueue)
+        {
+            this.ActionQueue.Enqueue(action);
+        }
     }
 
     void Update()
@@ -49,16 +54,27 @@ public class ExecutionController : GameController
 
     public override void ActivateAlarm(bool status)
     {
-        throw new System.NotImplementedException();
+        foreach (GameObject civilian in allCivilian)
+        {
+            civilian.GetComponent<CivilianControlerVisualization>().isActive = status;
+        }
+
+        if (status)
+        {
+            foreach (GameObject civilian in allPolice)
+            {
+                civilian.GetComponent<PoliceControllerVisualization>().ChangePositions(2);
+            }
+        }
     }
 
     public override void Activate()
     {
-        throw new System.NotImplementedException();
+        player.SetActive(true);
     }
 
     public override void Deactivate()
     {
-        throw new System.NotImplementedException();
+        player.SetActive(false);
     }
 }

@@ -74,7 +74,8 @@ public class PlanningUIController : MonoBehaviour,
 
     public void NextButton()
     {
-        AddActionPanel(null);
+        MainGameController.Instance.MoveToExecution();
+        ((ExecutionController)MainGameController.Instance.activeGameController).SetActionQueue(PlanningController.Instance.ActionQueue);
     }
 
     public void AddActionPanel(Texture2D texture)
