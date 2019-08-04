@@ -1,12 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using DG.Tweening;
 
 public class MainGameController : MonoBehaviour
 {
     public GameObject visualizingStageController;
     public GameObject planningStageController;
     public GameObject executionStageController;
+
+    public GameObject panelFirst;
+    public GameObject panelStage1;
+    public GameObject panelStage2;
+    public GameObject panelStage3;
 
     [HideInInspector]
     public GameController activeGameController;
@@ -29,6 +37,8 @@ public class MainGameController : MonoBehaviour
         }
 
         Instance = this;
+
+        DOTween.Init();
 
         activeGameController = visualizingStageController.GetComponent<GameController>();
 
@@ -69,15 +79,41 @@ public class MainGameController : MonoBehaviour
 
     public void PlayPressed()
     {
+        panelFirst.gameObject.SetActive(true);
+
+        StartCoroutine(Finish());
+
+        panelFirst.gameObject.SetActive(false);
+        panelStage1.gameObject.SetActive(true);
+
+        StartCoroutine(Finish());
+
+        panelStage1.gameObject.SetActive(false);
+
         activeGameController = visualizingStageController.GetComponent<GameController>();
         SetAbility();
         activeGameController.Activate();
 
         mainMenuUI.gameObject.SetActive(false);
+
+
     }
+
+    IEnumerator Finish()
+    {
+        yield return new WaitForSeconds(5f);
+        // Do some stuff
+    }
+
 
     public void MoveToPlanning()
     {
+        panelStage2.gameObject.SetActive(true);
+
+        StartCoroutine(Finish());
+
+        panelStage2.gameObject.SetActive(false);
+
         activeGameController.Deactivate();
         activeGameController = planningStageController.GetComponent<GameController>();
         activeGameController.Activate();
@@ -85,6 +121,12 @@ public class MainGameController : MonoBehaviour
 
     public void MoveToExecution()
     {
+        panelStage3.gameObject.SetActive(true);
+
+        StartCoroutine(Finish());
+
+        panelStage3.gameObject.SetActive(false);
+
         activeGameController.Deactivate();
         activeGameController = executionStageController.GetComponent<GameController>();
         activeGameController.Activate();
