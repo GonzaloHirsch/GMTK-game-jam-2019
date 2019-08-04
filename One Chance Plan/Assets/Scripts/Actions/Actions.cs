@@ -3,6 +3,7 @@
 public interface IAction
 {
     bool Execute();
+    void Undo();
 }
 
 
@@ -20,6 +21,12 @@ public class WaitAction : IAction
         steps--;
         return steps <= 0;
     }
+
+    public void Undo()
+    {
+        PlayerPlanningController.Instance.UndoAction();
+        Debug.Log("Undoing Wait");
+    }
 }
 
 public class InteractAction : IAction
@@ -35,6 +42,12 @@ public class InteractAction : IAction
     {
         interactable.Interact();
         return true;
+    }
+
+    public void Undo()
+    {
+        PlayerPlanningController.Instance.UndoAction();
+        Debug.Log("Undoing Inter");
     }
 }
 
@@ -70,5 +83,10 @@ public class MoveAction : IAction
         }
         return Vector3Int.FloorToInt(ret);
 
+    }
+
+    public void Undo() {
+        PlayerPlanningController.Instance.UndoMovement();
+        Debug.Log("Undoing movement");
     }
 }

@@ -17,8 +17,12 @@ public class PlayerPlanningController : MonoBehaviour
     public Vector2Int StartCellPosition; 
 
     public Vector3Int position;
-    private Vector3 MoveTo = Vector3.zero;
-    private List<Vector3Int> moveVertex;
+    public Vector3 MoveTo = Vector3.zero;
+    public List<Vector3Int> moveVertex;
+
+    private Dictionary<Vector3Int, TileBase> actionMap;
+
+    public bool isUsingUI = false;
 
     void Start()
     {
@@ -30,14 +34,38 @@ public class PlayerPlanningController : MonoBehaviour
 
         moveVertex = new List<Vector3Int>();
         moveVertex.Add((Vector3Int)StartCellPosition);
+        actionMap = new Dictionary<Vector3Int, TileBase>();
     }
-
-    
 
     private void Update()
     {
-        DrawSelection();
-        SetPosition();
+        if (!isUsingUI)
+        {
+            DrawSelection();
+            SetPosition();
+        }
+    }
+
+    public void UndoAction()
+    {
+        int i = 0;
+        foreach(Vector3Int v in actionMap.Keys)
+        {
+            if (i == actionMap.Keys.Count-1)
+            {
+                highlightMap.SetTile(v, null);
+                actionMap.Remove(v);
+            }
+        }
+    }
+
+    public void UndoMovement()
+    {
+        DrawLineSegment(position, Vector3Int.CeilToInt(position + MoveTo), null);
+        position = moveVertex[moveVertex.Count - 2];
+        DrawLineSegment(moveVertex[moveVertex.Count - 1], moveVertex[moveVertex.Count - 2], null);
+        moveVertex.RemoveAt(moveVertex.Count - 1);
+        transform.position = map.GetCellCenterWorld(position);
     }
 
     private void DrawSelection()
@@ -65,18 +93,29 @@ public class PlayerPlanningController : MonoBehaviour
                 DrawLineSegment(moveVertex[i], moveVertex[i + 1], pathTile);
             }
             DrawLineSegment(position, Vector3Int.CeilToInt(position + line), highlightTile);
+            foreach(Vector3Int v in actionMap.Keys)
+                highlightMap.SetTile(v, actionMap[v]);
 
             MoveTo = line;
         }
     }
 
-    private void DrawLineSegment(Vector3Int start, Vector3Int end, TileBase tile)
+    public void DrawLineSegment(Vector3Int start, Vector3Int end, TileBase tile)
     {
         Vector3 tempLine = end - start;
         for (int i = 0; i <= tempLine.magnitude; i++)
         {
             highlightMap.SetTile(Vector3Int.CeilToInt(start + tempLine.normalized * i), tile);
         }
+    }
+
+    
+
+    public void SetActionTile(TileBase tile)
+    {
+        actionMap.Add(position, tile);
+        highlightMap.SetTile(position, tile);
+
     }
 
     private void SetPosition()
@@ -88,6 +127,7 @@ public class PlayerPlanningController : MonoBehaviour
             MoveTo = Vector3.zero;
             transform.position = map.GetCellCenterWorld(position);
             moveVertex.Add(new Vector3Int(position.x, position.y,0));
+            PlanningUIController.Instance.AddActionPanel(PlanningUIController.Instance.moveTexture);
         }
     }
 

@@ -4,35 +4,61 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PlanningController : MonoBehaviour
+public class PlanningController : GameController
 {
+    public GameObject ScenePrefab;
+    public GameObject Scene;
+
+
     public static PlanningController Instance;
 
     public Grid map;
     public Tilemap tilemap;
 
-    private Queue<IAction> ActionQueue;
+    private List<IAction> ActionQueue;
 
     public void AddWait()
     {
-        ActionQueue.Enqueue(new WaitAction(10));
+        ActionQueue.Add(new WaitAction(1));
     }
 
     public void AddInteraction(Interactable interactable)
     {
-       ActionQueue.Enqueue(new InteractAction(interactable));
+       ActionQueue.Add(new InteractAction(interactable));
     }
 
     public void AddMovement(Vector3Int direction)
     {
-        ActionQueue.Enqueue(new MoveAction(direction));
+        ActionQueue.Add(new MoveAction(direction));
+    }
+
+    public void UndoAction()
+    {
+        if (ActionQueue.Count > 0)
+        {
+            ActionQueue[ActionQueue.Count - 1].Undo();
+            ActionQueue.RemoveAt(ActionQueue.Count - 1);
+        }
     }
 
     void Start()
     {
-        ActionQueue = new Queue<IAction>();
+        ActionQueue = new List<IAction>();
         Instance = this;
     }
 
-    
+    public override void ActivateAlarm(bool status)
+    {
+        //
+    }
+
+    public override void Activate()
+    {
+        Scene = Instantiate(ScenePrefab);
+    }
+
+    public override void Deactivate()
+    {
+        Destroy(Scene);
+    }
 }
