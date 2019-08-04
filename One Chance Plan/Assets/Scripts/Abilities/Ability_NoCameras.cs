@@ -16,10 +16,10 @@ public class Ability_NoCameras : Ability
 
     public override void Apply()
     {
-        foreach (GameObject camera in MainGameController.Instance.GetActiveGameController().allCameras)
+        foreach (GameObject cam in MainGameController.Instance.GetActiveGameController().allCameras)
         {
-            camera.GetComponent<SecurityCamera>().isActive = false;
-            camera.GetComponentInChildren<FOV>().awarenessFactor = 0;
+            cam.GetComponent<SecurityCamera>().isActive = false;
+            cam.GetComponentInChildren<FOV>().awarenessFactor = 0;
         }
     }
 }
