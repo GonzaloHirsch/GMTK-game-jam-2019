@@ -72,18 +72,17 @@ public class VisualizingStageController : GameController
         {
             civilian.GetComponent<CivilianControlerVisualization>().isActive = status;
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Player"))
+        if (status)
         {
-            MainGameController.Instance.MoveToPlanning();
+            foreach (GameObject civilian in allPolice)
+            {
+                civilian.GetComponent<PoliceControllerVisualization>().ChangePositions(2);
+            }
         }
     }
 
-    // The only collider that can enter is the player collider
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         MainGameController.Instance.MoveToPlanning();
     }
