@@ -12,6 +12,7 @@ public class PlanningController : GameController
     public static PlanningController Instance;
 
     public Grid map;
+    public Tilemap highlight;
     public Tilemap tilemap;
 
     public List<IAction> ActionQueue;
@@ -58,6 +59,7 @@ public class PlanningController : GameController
 
     public override void Deactivate()
     {
+        highlight.gameObject.SetActive(false);
         Scene.SetActive(false);
     }
 }
