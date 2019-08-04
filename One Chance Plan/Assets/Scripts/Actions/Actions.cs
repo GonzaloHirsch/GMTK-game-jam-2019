@@ -46,6 +46,7 @@ public class MoveAction : IAction
 
     public bool Execute()
     {
+        steps = (int)Vector3Int.Distance(player.position, position);
         if (steps-- == 0)
             return true;
         player.Move(getDirection(position));
@@ -56,7 +57,6 @@ public class MoveAction : IAction
     {
         this.player = PlayerExecutionController.Instance;
         this.position = position;
-        steps = (int)Vector3Int.Distance(player.position, position);
     }
 
     private Vector3Int getDirection(Vector3Int vector)

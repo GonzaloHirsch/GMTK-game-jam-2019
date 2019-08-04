@@ -10,9 +10,15 @@ public class PlayerPlanningController : MonoBehaviour
     public Camera mainCamera;
     public Tilemap map;
     public Tilemap highlightMap;
-    public Vector2Int StartCellPosition;
+    public TileBase pathTile;
+    public TileBase highlightTile;
+
+
+    public Vector2Int StartCellPosition; 
 
     private Vector3Int position;
+    private Vector3 MoveTo = Vector3.zero;
+    private List<Vector3Int> moveVertex;
 
     void Start()
     {
@@ -21,13 +27,67 @@ public class PlayerPlanningController : MonoBehaviour
         Instance = this;
         position = (Vector3Int)StartCellPosition;
         transform.position = map.GetCellCenterWorld((Vector3Int)StartCellPosition);
+
+        moveVertex = new List<Vector3Int>();
+        moveVertex.Add((Vector3Int)StartCellPosition);
     }
+
+    
 
     private void Update()
     {
+        DrawSelection();
+        SetPosition();
+    }
+
+    private void DrawSelection()
+    {
         if (map.GetTile(map.WorldToCell(mainCamera.ScreenToWorldPoint(Input.mousePosition))) != null)
         {
-            Vector3Int line = position - map.WorldToCell(mainCamera.ScreenToWorldPoint(Input.mousePosition));
+            Vector3 line = map.WorldToCell(mainCamera.ScreenToWorldPoint(Input.mousePosition)) - position;
+            if (Mathf.Abs(line.x) > Mathf.Abs(line.y))
+                line.y = 0;
+            else
+                line.x = 0;
+            for (int i = 0; i <= line.magnitude; i++)
+            {
+                if(map.GetTile(position + Vector3Int.CeilToInt(line.normalized * i)) == null){
+                    line = line.normalized * i;
+                    break;
+                }
+            }
+
+            DrawLineSegment(position, Vector3Int.CeilToInt(position + MoveTo), null);
+            
+            for (int i = 0; i < moveVertex.Count - 1; i++)
+            {
+
+                DrawLineSegment(moveVertex[i], moveVertex[i + 1], pathTile);
+            }
+            DrawLineSegment(position, Vector3Int.CeilToInt(position + line), highlightTile);
+
+            MoveTo = line;
+        }
+    }
+
+    private void DrawLineSegment(Vector3Int start, Vector3Int end, TileBase tile)
+    {
+        Vector3 tempLine = end - start;
+        for (int i = 0; i <= tempLine.magnitude; i++)
+        {
+            highlightMap.SetTile(Vector3Int.CeilToInt(start + tempLine.normalized * i), tile);
+        }
+    }
+
+    private void SetPosition()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            PlanningController.Instance.AddMovement(Vector3Int.CeilToInt(MoveTo));
+            position += Vector3Int.CeilToInt(MoveTo);
+            MoveTo = Vector3.zero;
+            transform.position = map.GetCellCenterWorld(position);
+            moveVertex.Add(new Vector3Int(position.x, position.y,0));
         }
     }
 

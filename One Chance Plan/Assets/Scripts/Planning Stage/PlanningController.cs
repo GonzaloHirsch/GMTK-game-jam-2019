@@ -6,12 +6,12 @@ using UnityEngine.Tilemaps;
 
 public class PlanningController : MonoBehaviour
 {
+    public static PlanningController Instance;
+
     public Grid map;
     public Tilemap tilemap;
-    private PlayerExecutionController player;
 
     private Queue<IAction> ActionQueue;
-    private int ticks = 0;
 
     public void AddWait()
     {
@@ -23,33 +23,16 @@ public class PlanningController : MonoBehaviour
         //ActionQueue.Enqueue(new InteractAction());
     }
 
-    public void AddMovement()
+    public void AddMovement(Vector3Int direction)
     {
-        //ActionQueue.Enqueue(new MoveAction());
+        ActionQueue.Enqueue(new MoveAction(direction));
     }
 
     void Start()
     {
         ActionQueue = new Queue<IAction>();
-        player = PlayerExecutionController.Instance;
-        ActionQueue.Enqueue(new MoveAction(new Vector3Int(6,0,0)));
+        Instance = this;
     }
 
-    void Update()
-    {
-        if (ticks % 2 == 0)
-            UpdateStep();
-
-        ticks++;
-    }
-
-    private void UpdateStep()
-    {
-        if (ActionQueue.Count > 0)
-        {
-            bool canDequeue = ActionQueue.Peek().Execute();
-            if (canDequeue)
-                ActionQueue.Dequeue();
-        }   
-    }
+    
 }

@@ -8,7 +8,6 @@ public class PlayerExecutionController : MonoBehaviour
 {
     public static PlayerExecutionController Instance;
 
-    public int ticks = 0;
     public Tilemap map;
 
     public float velocity;
@@ -29,6 +28,20 @@ public class PlayerExecutionController : MonoBehaviour
         transform.position = map.GetCellCenterWorld((Vector3Int)StartCellPosition);
     }
 
+    public void MoveTo(Vector3Int position)
+    {
+        this.position = position;
+        movePositions.Enqueue(this.position);
+        
+    }
+
+    public void Move(Vector3Int position)
+    {
+        this.position += position;
+        movePositions.Enqueue(this.position);
+        
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -46,20 +59,6 @@ public class PlayerExecutionController : MonoBehaviour
             if (Vector2.Distance(transform.position, map.GetCellCenterWorld(movePositions.Peek())) < DELTA)
                 transform.position = map.GetCellCenterWorld(movePositions.Dequeue());
         }
-    }
-
-    public void MoveTo(Vector3Int position)
-    {
-        this.position = position;
-        movePositions.Enqueue(this.position);
-        
-    }
-
-    public void Move(Vector3Int position)
-    {
-        this.position += position;
-        movePositions.Enqueue(this.position);
-        
     }
 
     private void UpdateMovement()
