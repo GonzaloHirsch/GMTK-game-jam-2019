@@ -18,9 +18,9 @@ public class PlanningController : MonoBehaviour
         ActionQueue.Enqueue(new WaitAction(10));
     }
 
-    public void AddInteraction()
+    public void AddInteraction(Interactable interactable)
     {
-        //ActionQueue.Enqueue(new InteractAction());
+       ActionQueue.Enqueue(new InteractAction(interactable));
     }
 
     public void AddMovement(Vector3Int direction)

@@ -16,7 +16,7 @@ public class PlayerPlanningController : MonoBehaviour
 
     public Vector2Int StartCellPosition; 
 
-    private Vector3Int position;
+    public Vector3Int position;
     private Vector3 MoveTo = Vector3.zero;
     private List<Vector3Int> moveVertex;
 
@@ -52,7 +52,7 @@ public class PlayerPlanningController : MonoBehaviour
             for (int i = 0; i <= line.magnitude; i++)
             {
                 if(map.GetTile(position + Vector3Int.CeilToInt(line.normalized * i)) == null){
-                    line = line.normalized * i;
+                    line = (line.normalized * (i-1));
                     break;
                 }
             }
@@ -91,4 +91,8 @@ public class PlayerPlanningController : MonoBehaviour
         }
     }
 
+    public TileBase GetStandingTile()
+    {
+        return map.GetTile(position);
+    }
 }
