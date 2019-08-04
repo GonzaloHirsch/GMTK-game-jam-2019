@@ -18,12 +18,6 @@ public class VisualizingStageController : GameController
         }
 
         Instance = this;
-
-        allKeys = new List<GameObject>();
-        allDoors = new List<GameObject>();
-        allPolice = new List<GameObject>();
-        allCameras = new List<GameObject>();
-        allCivilian = new List<GameObject>();
     }
 
     public override void Activate()
