@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Ability_MissingKeys : Ability
 {
-    public new string description = "Missing keys!";
+    private void Start()
+    {
+        description = "Missing keys!";
+
+        sprite = Resources.Load<Sprite>("Sprites/Icons/Ability_MissingKeys");
+    }
 
     public override void Apply()
     {

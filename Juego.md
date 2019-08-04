@@ -126,6 +126,8 @@ Los eventos se realizan una vez, ejemplo: si usas algo de incendios en visualiza
   * Doors are unlocked, people forgot to lock them
 * "Missing keys!"
   * Someone missplaced all the keys, doors cant be opened
+* "No people, must be a holiday!"
+  * There are no civilians in the bank
 
 ## Conceptos(Ideas para no olvidarnos)
 

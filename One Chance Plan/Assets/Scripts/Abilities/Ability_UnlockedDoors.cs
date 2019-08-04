@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Ability_UnlockedDoors : Ability
 {
-    public new string description = "Forgot to lock doors!";
+    private void Start()
+    {
+        description = "Forgot to lock doors!";
+
+        sprite = Resources.Load<Sprite>("Sprites/Icons/Ability_UnlockedDoors");
+    }
 
     public override void Apply()
     {

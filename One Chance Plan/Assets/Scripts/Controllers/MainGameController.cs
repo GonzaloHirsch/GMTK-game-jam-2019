@@ -15,7 +15,7 @@ public class MainGameController : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (Instance != this)
         {
@@ -24,6 +24,11 @@ public class MainGameController : MonoBehaviour
 
         Instance = this;
 
+        activeGameController = visualizingStageController.GetComponent<GameController>();
+    }
+
+    private void Start()
+    {
         LoadAbilities();
     }
 
@@ -35,6 +40,7 @@ public class MainGameController : MonoBehaviour
         abilities.Add(new Ability_MissingKeys());
         abilities.Add(new Ability_LowPayPolice());
         abilities.Add(new Ability_UnlockedDoors());
+        abilities.Add(new Ability_NoPeople());
     }
 
     // Update is called once per frame

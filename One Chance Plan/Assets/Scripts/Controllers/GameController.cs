@@ -10,6 +10,11 @@ public abstract class GameController : MonoBehaviour
     public List<GameObject> allKeys;
     public List<GameObject> allDoors;
 
+    public bool isActive;
+
+    public float maxAwareness = 200;
+
+    [HideInInspector]
     public GameObject activePlayer;
 
     public PlayerController GetActivePlayerController()
@@ -17,5 +22,9 @@ public abstract class GameController : MonoBehaviour
         return activePlayer.GetComponent<PlayerController>();
     }
 
-    public abstract void ActivateAlarm();
+    public abstract void ActivateAlarm(bool status);
+
+    public abstract void Activate();
+
+    public abstract void Deactivate();
 }

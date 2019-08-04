@@ -6,7 +6,12 @@ public class Ability_LowPayPolice : Ability
 {
     public float awarenessFactorDecrease = 3f;
 
-    public new string description = "Today it's Friday!";
+    private void Start()
+    {
+        description = "Today it's Friday!";
+
+        sprite = Resources.Load<Sprite>("Sprites/Icons/Ability_LowPayPolice");
+    }
 
     public override void Apply()
     {

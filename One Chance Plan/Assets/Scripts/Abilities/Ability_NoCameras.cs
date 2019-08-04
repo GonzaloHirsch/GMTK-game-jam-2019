@@ -7,7 +7,12 @@ using UnityEngine;
 /// </summary>
 public class Ability_NoCameras : Ability
 {
-    public new string description = "No power, no cameras!";
+    private void Start()
+    {
+        description = "No power, no cameras!";
+
+        sprite = Resources.Load<Sprite>("Sprites/Icons/Ability_NoCameras");
+    }
 
     public override void Apply()
     {

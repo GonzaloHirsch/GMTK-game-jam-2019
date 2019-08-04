@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Ability_NoPolice : Ability
 {
-    public new string description = "Police Union Strike!";
+    private void Start()
+    {
+        description = "Police Union Strike!";
+
+        sprite = Resources.Load<Sprite>("Sprites/Icons/Ability_NoPolice");
+    }
 
     public override void Apply()
     {

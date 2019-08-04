@@ -6,7 +6,12 @@ public class Ability_AlertPolice : Ability
 {
     public float awarenessFactorIncrease = 3f;
 
-    public new string description = "High alert police!";
+    private void Start()
+    {
+        description = "High alert police!";
+
+        sprite = Resources.Load<Sprite>("Sprites/Icons/Ability_AlertPolice");
+    }
 
     public override void Apply()
     {
