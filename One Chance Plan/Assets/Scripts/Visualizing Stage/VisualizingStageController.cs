@@ -84,6 +84,7 @@ public class VisualizingStageController : GameController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        MainGameController.Instance.MoveToPlanning();
+        if(collision.tag == "Player")
+            MainGameController.Instance.MoveToPlanning();
     }
 }

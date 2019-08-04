@@ -110,7 +110,7 @@ public class MainGameController : MonoBehaviour
     {
         panelStage2.gameObject.SetActive(true);
 
-        StartCoroutine(Finish());
+        //StartCoroutine(Finish());
 
         panelStage2.gameObject.SetActive(false);
 
