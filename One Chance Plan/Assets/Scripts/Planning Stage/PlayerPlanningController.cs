@@ -113,8 +113,11 @@ public class PlayerPlanningController : MonoBehaviour
 
     public void SetActionTile(TileBase tile)
     {
-        actionMap.Add(position, tile);
-        highlightMap.SetTile(position, tile);
+        if (!actionMap.ContainsKey(position))
+        {
+            actionMap.Add(position, tile);
+            highlightMap.SetTile(position, tile);
+        }
 
     }
 

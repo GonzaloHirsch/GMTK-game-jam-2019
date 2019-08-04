@@ -18,7 +18,7 @@ public class PlanningController : GameController
 
     public void AddWait()
     {
-        ActionQueue.Add(new WaitAction(1));
+        ActionQueue.Add(new WaitAction(10));
     }
 
     public void AddInteraction(Interactable interactable)

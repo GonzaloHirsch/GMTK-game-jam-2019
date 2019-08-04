@@ -18,6 +18,7 @@ public class WaitAction : IAction
 
     public bool Execute()
     {
+        Debug.Log(steps);
         steps--;
         return steps <= 0;
     }
@@ -54,22 +55,20 @@ public class InteractAction : IAction
 public class MoveAction : IAction
 {
     public Vector3Int position;
-    public PlayerExecutionController player;
     private int steps;
 
     public bool Execute()
     {
-        steps = (int)Vector3Int.Distance(player.position, position);
-        if (steps-- == 0)
+        if (steps-- <= 0)
             return true;
-        player.Move(getDirection(position));
+        PlayerExecutionController.Instance.Move(getDirection(position));
         return false;
     }
 
     public MoveAction(Vector3Int position)
     {
-        this.player = PlayerExecutionController.Instance;
         this.position = position;
+        steps = (int)position.magnitude;
     }
 
     private Vector3Int getDirection(Vector3Int vector)
