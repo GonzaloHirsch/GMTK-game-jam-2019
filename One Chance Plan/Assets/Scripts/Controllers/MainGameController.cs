@@ -19,33 +19,54 @@ public class MainGameController : MonoBehaviour
     {
         if (Instance != this)
         {
-            Destroy(this);
+            Destroy(Instance);
         }
 
         Instance = this;
 
         activeGameController = visualizingStageController.GetComponent<GameController>();
+
+        LoadAbilities();
+
+        SetAbility();
     }
 
     private void Start()
     {
-        LoadAbilities();
+
     }
 
     private void LoadAbilities()
     {
+        abilities = new List<Ability>();
+
         abilities.Add(new Ability_NoPolice());
         abilities.Add(new Ability_NoCameras());
-        abilities.Add(new Ability_AlertPolice());
-        abilities.Add(new Ability_MissingKeys());
-        abilities.Add(new Ability_LowPayPolice());
-        abilities.Add(new Ability_UnlockedDoors());
+        //abilities.Add(new Ability_AlertPolice());
+        //abilities.Add(new Ability_MissingKeys());
+        //abilities.Add(new Ability_LowPayPolice());
+        //abilities.Add(new Ability_UnlockedDoors());
         abilities.Add(new Ability_NoPeople());
+        abilities.Add(new Ability_Empty());
+    }
+
+    private void SetAbility()
+    {
+        MainPlayerController.Instance.ability = abilities[Random.Range(0, abilities.Count)];
+        MainPlayerController.Instance.ability.Apply();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            activeGameController.Activate();
+        }
+    }
+
+    public void MoveToPlanning()
+    {
+
     }
 }

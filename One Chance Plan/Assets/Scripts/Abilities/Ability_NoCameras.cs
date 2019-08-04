@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Ability_NoCameras : Ability
 {
-    private void Start()
+    public Ability_NoCameras()
     {
         description = "No power, no cameras!";
 

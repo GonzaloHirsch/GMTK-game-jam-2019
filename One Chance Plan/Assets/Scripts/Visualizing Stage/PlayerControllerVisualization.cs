@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerControllerVisualization : PlayerController
 {
+    public static PlayerControllerVisualization Instance;
+
     public float Velocity = 2f;
     public float ViewingDistance = 4f;
     public float offset = 1f;
@@ -13,6 +15,12 @@ public class PlayerControllerVisualization : PlayerController
     // Start is called before the first frame update
     void Start()
     {
+        if (Instance != this)
+        {
+            Destroy(Instance);
+        }
+
+        Instance = this;
     }
 
     // Update is called once per frame
@@ -30,10 +38,6 @@ public class PlayerControllerVisualization : PlayerController
 
     public override void Activate()
     {
-        ability = MainGameController.Instance.abilities[Random.Range(0, MainGameController.Instance.abilities.Count)];
-
-        ability.Apply();
-
         isActive = true;
     }
 

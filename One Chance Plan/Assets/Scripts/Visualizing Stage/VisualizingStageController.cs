@@ -6,9 +6,17 @@ public class VisualizingStageController : GameController
 {
     public GameObject abilityComponent;
 
+    public static VisualizingStageController Instance;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (Instance != this)
+        {
+            Destroy(Instance);
+        }
+
+        Instance = this;
     }
 
     public override void Activate()
@@ -37,7 +45,7 @@ public class VisualizingStageController : GameController
             camera.GetComponent<CameraControllerVisualization>().isActive = state;
         }
 
-        activePlayer.GetComponent<PlayerControllerVisualization>().isActive = state;
+        GetActivePlayerController().GetComponent<PlayerControllerVisualization>().isActive = state;
     }
 
 
@@ -45,7 +53,7 @@ public class VisualizingStageController : GameController
     {
         if (isActive)
         {
-            if (activePlayer.GetComponent<PlayerControllerVisualization>().awareness > maxAwareness)
+            if (GetActivePlayerController().GetComponent<PlayerControllerVisualization>().awareness > maxAwareness)
             {
                 Deactivate();
             }
@@ -57,6 +65,14 @@ public class VisualizingStageController : GameController
         foreach (GameObject civilian in allCivilian)
         {
             civilian.GetComponent<CivilianControlerVisualization>().isActive = status;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            MainGameController.Instance.MoveToPlanning();
         }
     }
 }

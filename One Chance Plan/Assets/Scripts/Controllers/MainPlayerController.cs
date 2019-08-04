@@ -7,7 +7,10 @@ public class MainPlayerController : MonoBehaviour
     public GameObject visualizingStagePlayerController;
 
     [HideInInspector]
-    public GameObject activePlayerController;
+    public Ability ability;
+
+    [HideInInspector]
+    public PlayerController activePlayerController;
 
     public static MainPlayerController Instance;
 
@@ -21,17 +24,27 @@ public class MainPlayerController : MonoBehaviour
     {
         if (Instance != this)
         {
-            Destroy(this);
+            Destroy(Instance);
         }
 
         Instance = this;
 
-        activePlayerController = visualizingStagePlayerController;
+        ability = new Ability_Empty();
+
+        activePlayerController = visualizingStagePlayerController.GetComponent<PlayerController>();
+    }
+
+
+    private void Start()
+    {
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            activePlayerController.Activate();
+        }
     }
 }

@@ -9,8 +9,6 @@ public abstract class PlayerController : MonoBehaviour
 
     public GameObject player;
 
-    public Ability ability;
-
     public float awareness;
 
     public bool isActive;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ability_UnlockedDoors : Ability
 {
-    private void Start()
+    public Ability_UnlockedDoors()
     {
         description = "Forgot to lock doors!";
 
