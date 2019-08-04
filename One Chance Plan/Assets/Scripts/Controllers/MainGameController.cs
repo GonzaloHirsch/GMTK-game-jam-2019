@@ -5,9 +5,15 @@ using UnityEngine;
 public class MainGameController : MonoBehaviour
 {
     public GameObject visualizingStageController;
+    public GameObject planningStageController;
+    public GameObject executionStageController;
+
+    [HideInInspector]
     public GameController activeGameController;
     public static MainGameController Instance;
     public List<Ability> abilities;
+
+    public Canvas mainMenuUI;
 
     public GameController GetActiveGameController()
     {
@@ -27,11 +33,11 @@ public class MainGameController : MonoBehaviour
         activeGameController = visualizingStageController.GetComponent<GameController>();
 
         LoadAbilities();
-
-        SetAbility();
     }
 
-    private void Start()
+
+
+    public void CreditsPressed()
     {
 
     }
@@ -42,10 +48,10 @@ public class MainGameController : MonoBehaviour
 
         abilities.Add(new Ability_NoPolice());
         abilities.Add(new Ability_NoCameras());
-        //abilities.Add(new Ability_AlertPolice());
-        //abilities.Add(new Ability_MissingKeys());
-        //abilities.Add(new Ability_LowPayPolice());
-        //abilities.Add(new Ability_UnlockedDoors());
+        abilities.Add(new Ability_AlertPolice());
+        abilities.Add(new Ability_MissingKeys());
+        abilities.Add(new Ability_LowPayPolice());
+        abilities.Add(new Ability_UnlockedDoors());
         abilities.Add(new Ability_NoPeople());
         abilities.Add(new Ability_Empty());
     }
@@ -59,14 +65,34 @@ public class MainGameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            activeGameController.Activate();
-        }
+    }
+
+    public void PlayPressed()
+    {
+        activeGameController = visualizingStageController.GetComponent<GameController>();
+        SetAbility();
+        activeGameController.Activate();
+
+        mainMenuUI.gameObject.SetActive(false);
     }
 
     public void MoveToPlanning()
     {
+        activeGameController.Deactivate();
+        activeGameController = planningStageController.GetComponent<GameController>();
+        activeGameController.Activate();
+    }
 
+    public void MoveToExecution()
+    {
+        activeGameController.Deactivate();
+        activeGameController = executionStageController.GetComponent<GameController>();
+        activeGameController.Activate();
+    }
+
+    public void MoveToEnd()
+    {
+        activeGameController.Deactivate();
+        activeGameController = null;
     }
 }

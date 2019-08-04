@@ -11,7 +11,7 @@ public abstract class PlayerController : MonoBehaviour
 
     public float awareness;
 
-    public bool isActive;
+    public bool isActive = false;
 
     /// <summary>
     /// This method initializes all important variables and sets the controller as active.

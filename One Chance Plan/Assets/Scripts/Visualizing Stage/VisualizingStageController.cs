@@ -5,6 +5,7 @@ using UnityEngine;
 public class VisualizingStageController : GameController
 {
     public GameObject abilityComponent;
+    public Canvas UI;
 
     public static VisualizingStageController Instance;
 
@@ -17,20 +18,31 @@ public class VisualizingStageController : GameController
         }
 
         Instance = this;
+
+        allKeys = new List<GameObject>();
+        allDoors = new List<GameObject>();
+        allPolice = new List<GameObject>();
+        allCameras = new List<GameObject>();
+        allCivilian = new List<GameObject>();
     }
 
     public override void Activate()
     {
+        UI.gameObject.SetActive(true);
+        this.gameObject.SetActive(true);
         SetActiveState(true);
         isActive = true;
+        abilityComponent.GetComponent<AbilityImage>().Activate();
         abilityComponent.GetComponent<AbilityImage>().SetImage();
     }
 
     public override void Deactivate()
     {
+        UI.gameObject.SetActive(false);
         SetActiveState(false);
         ActivateAlarm(false);
         isActive = false;
+        this.gameObject.SetActive(false);
     }
 
     private void SetActiveState(bool state)
@@ -40,9 +52,9 @@ public class VisualizingStageController : GameController
             police.GetComponent<PoliceControllerVisualization>().isActive = state;
         }  
 
-        foreach (GameObject camera in allCameras)
+        foreach (GameObject cam in allCameras)
         {
-            camera.GetComponent<CameraControllerVisualization>().isActive = state;
+            cam.GetComponent<CameraControllerVisualization>().isActive = state;
         }
 
         GetActivePlayerController().GetComponent<PlayerControllerVisualization>().isActive = state;
@@ -74,5 +86,11 @@ public class VisualizingStageController : GameController
         {
             MainGameController.Instance.MoveToPlanning();
         }
+    }
+
+    // The only collider that can enter is the player collider
+    private void OnTriggerEnter(Collider other)
+    {
+        MainGameController.Instance.MoveToPlanning();
     }
 }
