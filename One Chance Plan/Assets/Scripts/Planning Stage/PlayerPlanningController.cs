@@ -7,7 +7,9 @@ public class PlayerPlanningController : MonoBehaviour
 {
     public static PlayerPlanningController Instance;
 
+    public Camera mainCamera;
     public Tilemap map;
+    public Tilemap highlightMap;
     public Vector2Int StartCellPosition;
 
     private Vector3Int position;
@@ -20,4 +22,13 @@ public class PlayerPlanningController : MonoBehaviour
         position = (Vector3Int)StartCellPosition;
         transform.position = map.GetCellCenterWorld((Vector3Int)StartCellPosition);
     }
+
+    private void Update()
+    {
+        if (map.GetTile(map.WorldToCell(mainCamera.ScreenToWorldPoint(Input.mousePosition))) != null)
+        {
+            Vector3Int line = position - map.WorldToCell(mainCamera.ScreenToWorldPoint(Input.mousePosition));
+        }
+    }
+
 }
